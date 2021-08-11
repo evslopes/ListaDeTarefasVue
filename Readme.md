@@ -6,3 +6,7 @@
 - Preencha esse array com várias tarefas e as propriedades acima;
 - Exiba uma lista com essas tarefas exibindo a descrição;
 Implemente um elemento de interface para a tarefa que possuir a variável estaCompleta como True. Sugestões de elemento de interface: Texto sublinhado, Texto riscado, Cor diferente, etc;
+
+
+![image](https://github.com/evslopes/ListaDeTarefasVue/blob/master/ListaDeTarefasVue.jpg?raw=true)
+
