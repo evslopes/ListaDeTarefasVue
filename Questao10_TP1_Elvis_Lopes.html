@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>TP1 Elvis Lopes - Q10</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="valornymous">
+</head>
+
+<body :>
+<div id="app" class="container py-3">
+    <h1 class="fs-1">Tarefas</h1>
+    <input type="text" class="form-label"
+           v-model="campoTexto" @keyup.enter="adicionar">
+    <ul class="form-check">
+        <li class="list-unstyled mt-3 mb-4" v-for="(tarefa,indice) of tarefas" :key="indice">
+
+            <input type="checkbox" v-model="tarefa.estaCompleta">
+            <input class="form-label fs-4" v-if="editando === tarefa" v-model="tarefa.descricao" placeholder="texto"/>
+            <span class="form-label fs-4" v-else>{{ tarefa.descricao }}</span>
+            <div >
+                <button type="button" class="w-5 btn btn-sm btn-outline-danger" @click="remover(indice)">remover</button>
+                <button type="button" class="w-5 btn btn-sm btn-outline-warning" @click="editar(tarefa)">editar</button>
+            </div>
+        </li>
+    </ul>
+    <div class="fs-3">
+        {{ tarefasCompletas }} tarefas de {{ quantidadeDeTarefas }}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    let qtd = 0
+    const app = new Vue({
+        el: '#app',
+        data: () => {
+            return {
+                tarefas: [
+                    {descricao: 'Estudar Vue',  estaCompleta: false},
+                    {descricao: 'Aprender Vue',  estaCompleta: false},
+                    {descricao: 'Finalizar TP1', estaCompleta: true}
+                ],
+                campoTexto: '',
+            }
+        },
+        computed: {
+            quantidadeDeTarefas() {
+                return this.tarefas.length
+            },
+            tarefasCompletas() {
+                qtd++
+                return this.tarefas.filter(tarefa => tarefa.estaCompleta === true).length
+            }
+        },
+        methods: {
+            adicionar() {
+                this.tarefas.push({descricao: this.campoTexto})
+                this.campoTexto = ''
+            },
+            remover(indice) {
+                this.tarefas.splice(indice, 1)
+            },
+            editar(tarefa) {
+                if (this.editando !== tarefa) {
+                    this.editando = tarefa
+                } else {
+                    this.editando = null
+                }
+            }
+
+        },
+    })
+
+</script>
+
+</body>
+</html>
